@@ -64,4 +64,40 @@ public class SQLMethods {
 
         return toDos;
     }
+    public static ToDo selectById(int id){
+     try{
+         Class.forName("org.postgresql.Driver");
+     }catch (Exception e){
+         e.printStackTrace();
+     }
+     try{
+         Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/todo","postgres","Bepc3827");
+         ResultSet resultat = conn.createStatement().executeQuery("SELECT * FROM todo where todo_id="+id);
+         while(resultat.next()){
+             return new ToDo(resultat.getInt("todo_id"),resultat.getString("title"),resultat.getString("description"),null,resultat.getDate("creation_date"),resultat.getDate("deadline"),null,null);
+         }
+     }catch (Exception e){
+         e.printStackTrace();
+     }
+     return null;
+    }
+    public static List<ToDo> selectByKeyword(String keyword,String Value){
+        List<ToDo> toDos = new ArrayList<>();
+        try{
+            Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/todo","postgres","Bepc3827");
+            ResultSet res = conn.createStatement().executeQuery("SELECT * FROM todo WHERE"+keyword+"='"+Value+"'");
+            while(res.next()){
+                toDos.add(new ToDo(res.getInt("todo_id"),res.getString("title"),res.getString("description"),null, res.getDate("creation_date"),res.getDate("deadline"),res.getDate("execution_date"),null));
+
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return toDos;
+    }
 }

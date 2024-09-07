@@ -6,6 +6,8 @@ import org.zavatra.todoj1.methods.SQLMethods;
 
 import java.util.List;
 
+import static org.zavatra.todoj1.methods.SQLMethods.selectByKeyword;
+
 @RestController
 public class endpoints {
     @GetMapping("/")
@@ -19,5 +21,9 @@ public class endpoints {
     @GetMapping("/todos/{id}")
     public ToDo getToDo(@PathVariable int id){
         return (SQLMethods.selectById(id));
+    }
+    @GetMapping("/todos/{Keyword}/{Value}")
+    public List<ToDo> getToDosByQuery(@PathVariable String Keyword, @PathVariable String Value){
+        return selectByKeyword(Keyword, Value);
     }
 }

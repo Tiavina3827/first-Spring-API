@@ -90,7 +90,7 @@ public class SQLMethods {
         }
         try{
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/todo","postgres","Bepc3827");
-            ResultSet res = conn.createStatement().executeQuery("SELECT * FROM todo WHERE"+keyword+"='"+Value+"'");
+            ResultSet res = conn.createStatement().executeQuery("SELECT * FROM todo WHERE "+keyword+" LIKE '"+Value+"'");
             while(res.next()){
                 toDos.add(new ToDo(res.getInt("todo_id"),res.getString("title"),res.getString("description"),null, res.getDate("creation_date"),res.getDate("deadline"),res.getDate("execution_date"),null));
 
@@ -99,5 +99,9 @@ public class SQLMethods {
             e.printStackTrace();
         }
         return toDos;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(selectByKeyword("title","Gym"));
     }
 }

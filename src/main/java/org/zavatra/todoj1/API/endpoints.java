@@ -1,7 +1,6 @@
 package org.zavatra.todoj1.API;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.zavatra.todoj1.classes.ToDo;
 import org.zavatra.todoj1.methods.SQLMethods;
 
@@ -16,5 +15,9 @@ public class endpoints {
     @GetMapping("/todos")
     public List<ToDo> getToDos(){
         return (SQLMethods.selectAll());
+    }
+    @GetMapping("/todos/{id}")
+    public ToDo getToDo(@PathVariable int id){
+        return (SQLMethods.selectById(id));
     }
 }

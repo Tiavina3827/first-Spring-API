@@ -2,6 +2,7 @@ package org.zavatra.todoj1.classes;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -10,7 +11,7 @@ import java.util.Date;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class ToDo {
+public class ToDo implements Serializable {
     private int id;
     private String title;
     private String description;

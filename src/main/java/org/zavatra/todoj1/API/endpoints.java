@@ -12,7 +12,7 @@ import static org.zavatra.todoj1.methods.SQLMethods.selectByKeyword;
 public class endpoints {
     @GetMapping("/")
     public String hello() {
-        return "hello";
+        return "Les différents endpoints possible:  /todos ;  /todos/{id} ;  /todos/{Keyword}/{Value}  " ;
     }
     @GetMapping("/todos")
     public List<ToDo> getToDos(){
@@ -26,4 +26,5 @@ public class endpoints {
     public List<ToDo> getToDosByQuery(@PathVariable String Keyword, @PathVariable String Value){
         return selectByKeyword(Keyword, Value);
     }
+
 }
